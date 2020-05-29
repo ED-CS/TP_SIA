@@ -36,7 +36,7 @@ public class WB_AjouterMaterielle extends JFrame {
 			}
 		});
 	}
-
+ 
 	/**
 	 * Create the frame.
 	 */

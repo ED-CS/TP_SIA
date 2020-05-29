@@ -58,6 +58,7 @@ public class AjouterPersonneFrame extends JFrame {
 	contentPane.add(lblNewLabel);
 	
 	tfNomPersonne = new JTextField();
+	tfNomPersonne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	tfNomPersonne.setBounds(190, 84, 160, 40);
 	contentPane.add(tfNomPersonne);
 	tfNomPersonne.setColumns(10);
@@ -124,6 +125,7 @@ public class AjouterPersonneFrame extends JFrame {
 				@SuppressWarnings("unused")
 				errorPan fail = new errorPan(error);
 			}
+			
 		}
 	});
 	btnCreerPersonne.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -151,6 +153,7 @@ public class AjouterPersonneFrame extends JFrame {
 	contentPane.add(label);
 	
 	tfPrenomPersonne = new JTextField();
+	tfPrenomPersonne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	tfPrenomPersonne.setColumns(10);
 	tfPrenomPersonne.setBounds(190, 137, 160, 40);
 	contentPane.add(tfPrenomPersonne);
@@ -161,6 +164,7 @@ public class AjouterPersonneFrame extends JFrame {
 	contentPane.add(label_1);
 	
 	tfEmailPersonne = new JTextField();
+	tfEmailPersonne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	tfEmailPersonne.setColumns(10);
 	tfEmailPersonne.setBounds(190, 243, 160, 40);
 	contentPane.add(tfEmailPersonne);
@@ -171,6 +175,7 @@ public class AjouterPersonneFrame extends JFrame {
 	contentPane.add(label_2);
 	
 	cbPostePersonne = new JComboBox();
+	cbPostePersonne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	cbPostePersonne.setModel(new DefaultComboBoxModel(new String[] {"Doctore", "Doctorent", "Etudaint", "Professoeur"}));
 	cbPostePersonne.setBounds(190, 190, 160, 40);
 	contentPane.add(cbPostePersonne);

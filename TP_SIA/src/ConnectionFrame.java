@@ -24,7 +24,7 @@ public class ConnectionFrame  extends JFrame{
 	
 	public ConnectionFrame() {
 		initialize();
-		
+		 
 	}
 
 	/**

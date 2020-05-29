@@ -12,14 +12,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
 
 public class AjouterMaterielleFrame extends JFrame{
 	
 	private JPanel contentPane;
 	private JTextField tfNomMaterielle;
-	private JTextField tfDateAchatMaterielle;
-	private JTextField tfFinGarantieMaterielle;
 	private Connection conn;
+	private JSpinner spAchatAnnee;
+	private JSpinner spAchatMoins;
+	private JSpinner spAchatJour;
+	private JSpinner spGarantieAnnee;
+	private JSpinner spGarantieMoins;
+	private JSpinner spGarantieJour;
+	private JComboBox cbEmplacementMaterielle;
 	
 	/**
 	 * Create the frame.
@@ -35,7 +44,7 @@ public class AjouterMaterielleFrame extends JFrame{
 	
 	this.conn = conn;
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setBounds(100, 100, 430, 430);
+	setBounds(100, 100, 500, 430);
 	contentPane = new JPanel();
 	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	setContentPane(contentPane);
@@ -43,86 +52,87 @@ public class AjouterMaterielleFrame extends JFrame{
 	
 	JLabel lblNewLabel = new JLabel("Nom");
 	lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-	lblNewLabel.setBounds(45, 83, 120, 40);
+	lblNewLabel.setBounds(45, 84, 120, 40);
 	contentPane.add(lblNewLabel);
 	
 	tfNomMaterielle = new JTextField();
 	tfNomMaterielle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	tfNomMaterielle.setBounds(190, 84, 160, 40);
+	tfNomMaterielle.setBounds(113, 84, 237, 40);
 	contentPane.add(tfNomMaterielle);
 	tfNomMaterielle.setColumns(10);
 	/*
-	 * Ajouter button 
+	 * Creer button 
 	 */
 	JButton btnCreerMaterielle = new JButton("cr\u00E9er");
 	btnCreerMaterielle.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			/*
+			String AchatAnnee = spAchatAnnee.getValue().toString();
 			
-			String NomMaterielle = null;
-    		String DateAchat = null;
-    		String DateFinGarentie = null;
-    		String Emplacement = null;
-    		String error = null;
-    		boolean exist =false;
-    		boolean nomMaterielle = true,dateAchat= true,dateFinGarentie= true,emplacement = true;
+			System.out.println(AchatAnnee);
+			/*
+			String NomMaterielle = tfNomMaterielle.getText();
+			int AchatJour = Integer.parseInt(spAchatJour.getValue().toString());
+			int AchatAnnee = Integer.parseInt(spAchatAnnee.getValue().toString());
+			int AchatMoins = Integer.parseInt(spAchatMoins.getValue().toString());
+			int GarantieAnnee = Integer.parseInt(spGarantieAnnee.getValue().toString());
+			int GarantieMoins = Integer.parseInt(spGarantieMoins.getValue().toString());
+			int GarantieJour = Integer.parseInt(spGarantieJour.getValue().toString());
+			String EmplacementMaterielle = cbEmplacementMaterielle.getSelectedItem().toString();
+			
+    		boolean achatJour = true, achatAnnee= true, achatMoins= true , emailPersonne= true , garantieAnnee= true , garantieJour= true,
+    				garantieMoins = true, nomMaterielle= true, emplacementMaterielle= true,achat = true, garantie = true;
+    		if((AchatAnnee>=2020)&&(AchatMoins>0)&&(AchatMoins<=12)) {
+    			if((AchatMoins==2)) {
+    				if(achat) {}
+    			}
+    		}
     		
-    		NomMaterielle = tfNomMaterielle.getText().toUpperCase();
+    		
+    		NomPersonne = tfNomPersonne.getText().toUpperCase();
+    		PrenomPersonne = tfPrenomPersonne.getText().toUpperCase();
+    		EmailPersonne = tfEmailPersonne.getText();
+    		PostePersonne = cbPostePersonne.getSelectedItem().toString();
+    		
     		// Check if name is correct
-    		if(!(NomMaterielle.length()<=30 && NomMaterielle.length()>=2 && Character.isAlphabetic(NomMaterielle.charAt(0)))) {
-    			tfNomMaterielle=false;
-    			tfNomMaterielle.setBackground(Color.RED);
+    		if(!(NomPersonne.length()<=30 && NomPersonne.length()>=2 && Character.isAlphabetic(NomPersonne.charAt(0)))) {
+    			nomPersonne=false;
+    			tfNomPersonne.setBackground(Color.RED);
     		}
-    		// Check if Price is empty
-    		if(price_textField.getText().equals("")) {
-    			price = false;
-    			price_textField.setBackground(Color.RED);
+    		// Check if prenom is correct
+    		if(!(PrenomPersonne.length()<=30 && PrenomPersonne.length()>=2 && Character.isAlphabetic(PrenomPersonne.charAt(0)))) {
+    			prenomPersonne=false;
+    			tfPrenomPersonne.setBackground(Color.RED);
     		}
-    		// Check if Quanity is empty
-    		if(quantity_textField.getText().equals("")) {
-    			quantity = false;
-    			quantity_textField.setBackground(Color.RED);
+    		// Check if email is correct
+    		if(!(EmailPersonne.length()>=10 && Character.isAlphabetic(EmailPersonne.charAt(0)))) {
+    			emailPersonne=false;
+    			tfEmailPersonne.setBackground(Color.RED);
     		}
-    		if(name && price && quantity) {
-				product_price = Double.parseDouble(price_textField.getText());
-				product_quantity = Integer.parseInt(quantity_textField.getText()) ;
-				for(i = 0;i<model.getRowCount();i++) {
-					if(table.getValueAt(i, 1).equals(product_name)) {
-						exist = true;
-						break;
-					}
-				}
-				if(!exist) {
+    		
+    		
+    		if(nomPersonne && prenomPersonne && emailPersonne ) {
 					try {
-						id_max++;
-						String requet = "INSERT INTO products(product_id,product_Name, product_Price, product_Quantity) "
-													+"VALUES("+id_max+",'"+product_name+"',"+product_price+","+product_quantity+")";
+						String requet = "INSERT INTO personne(nom_per,prenom_per,poste,email) "
+													+"VALUES('"+NomPersonne+"','"
+													+PrenomPersonne+"','"
+													+PostePersonne+"','"
+													+EmailPersonne+"');";
 						statement.executeUpdate(requet);
-						model.addRow(new Object[]{id_max, product_name, product_price, product_quantity});
 						
-						name_textField.setText(null);
-						price_textField.setText(null);
-						quantity_textField.setText(null);
-						exist = false;
+						tfNomPersonne.setText(null);
+						tfPrenomPersonne.setText(null);
+						tfEmailPersonne.setText(null);
 					}
-					catch (SQLException e) {
-						e.printStackTrace();
+					catch (SQLException o) {
+						o.printStackTrace();
 					}
-				}
-				else {
-					error =   "this product already exist \n"
-							+ "the id: "+model.getValueAt(i, 0);
-					
-					@SuppressWarnings("unused")
-					errorPan fail = new errorPan(error);
-				}
 			}
 			else {
-				error =  "-Name :"
-						+ "	-must be alphanumeric.\n"
-						+"	-start with a letter.\n"
-						+"	-between 2 and 30 character.\n"
-						+"-Price and Quantity can't be empty.";
+				String error =  "-Nom et prenom et Email :"
+						+ "	-alphabétique.\n"
+						+"	-commencer par  lettre.\n"
+						+"	-entre 2 et 30 character.\n"
+						+"	-Email >= 12 lettre.";
 				
 				@SuppressWarnings("unused")
 				errorPan fail = new errorPan(error);
@@ -133,7 +143,7 @@ public class AjouterMaterielleFrame extends JFrame{
 	
 	
 	btnCreerMaterielle.setFont(new Font("Tahoma", Font.BOLD, 16));
-	btnCreerMaterielle.setBounds(240, 324, 110, 40);
+	btnCreerMaterielle.setBounds(304, 362, 110, 40);
 	contentPane.add(btnCreerMaterielle);
 	
 	JButton btnAnnulerMaterielle = new JButton("Annuler");
@@ -143,7 +153,7 @@ public class AjouterMaterielleFrame extends JFrame{
 			dispose();
 		}
 	});
-	btnAnnulerMaterielle.setBounds(72, 324, 110, 40);
+	btnAnnulerMaterielle.setBounds(168, 362, 110, 40);
 	contentPane.add(btnAnnulerMaterielle);
 	
 	JLabel lblAjouterPersonne = new JLabel("Ajouter Mat\u00E9rielle");
@@ -151,43 +161,91 @@ public class AjouterMaterielleFrame extends JFrame{
 	lblAjouterPersonne.setBounds(101, 13, 190, 33);
 	contentPane.add(lblAjouterPersonne);
 	
-	JLabel label = new JLabel("Date Achat");
+	JLabel label = new JLabel("Achat:");
 	label.setFont(new Font("Tahoma", Font.BOLD, 16));
-	label.setBounds(45, 136, 120, 40);
+	label.setBounds(45, 136, 56, 40);
 	contentPane.add(label);
 	
-	tfDateAchatMaterielle = new JTextField();
-	tfDateAchatMaterielle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	tfDateAchatMaterielle.setColumns(10);
-	tfDateAchatMaterielle.setBounds(190, 137, 160, 40);
-	contentPane.add(tfDateAchatMaterielle);
-	
-	JLabel label_1 = new JLabel("Fin Garantie");
+	JLabel label_1 = new JLabel("Garantie:");
 	label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-	label_1.setBounds(45, 189, 120, 40);
+	label_1.setBounds(273, 136, 77, 40);
 	contentPane.add(label_1);
 	
 	JLabel label_2 = new JLabel("Emplacement");
 	label_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-	label_2.setBounds(45, 242, 120, 40);
+	label_2.setBounds(45, 297, 120, 40);
 	contentPane.add(label_2);
 	
-	tfFinGarantieMaterielle = new JTextField();
-	tfFinGarantieMaterielle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	tfFinGarantieMaterielle.setColumns(10);
-	tfFinGarantieMaterielle.setBounds(190, 190, 160, 40);
-	contentPane.add(tfFinGarantieMaterielle);
-	
-	JComboBox cbEmplacementMaterielle = new JComboBox();
+	cbEmplacementMaterielle = new JComboBox();
 	cbEmplacementMaterielle.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	cbEmplacementMaterielle.setBounds(190, 243, 160, 40);
+	cbEmplacementMaterielle.setBounds(190, 297, 275, 40);
 	contentPane.add(cbEmplacementMaterielle);
+	
+	JLabel lblAnne = new JLabel("Ann\u00E9e");
+	lblAnne.setFont(new Font("Tahoma", Font.BOLD, 13));
+	lblAnne.setBounds(113, 156, 50, 16);
+	contentPane.add(lblAnne);
+	
+	JLabel lblMoins = new JLabel("moins");
+	lblMoins.setFont(new Font("Tahoma", Font.BOLD, 13));
+	lblMoins.setBounds(113, 196, 50, 16);
+	contentPane.add(lblMoins);
+	
+	JLabel lblJour = new JLabel("jour");
+	lblJour.setFont(new Font("Tahoma", Font.BOLD, 13));
+	lblJour.setBounds(113, 240, 41, 16);
+	contentPane.add(lblJour);
+	
+	JLabel label_3 = new JLabel("Ann\u00E9e");
+	label_3.setFont(new Font("Tahoma", Font.BOLD, 13));
+	label_3.setBounds(362, 156, 50, 16);
+	contentPane.add(label_3);
+	
+	JLabel label_4 = new JLabel("moins");
+	label_4.setFont(new Font("Tahoma", Font.BOLD, 13));
+	label_4.setBounds(362, 196, 50, 16);
+	contentPane.add(label_4);
+	
+	JLabel label_5 = new JLabel("jour");
+	label_5.setFont(new Font("Tahoma", Font.BOLD, 13));
+	label_5.setBounds(362, 240, 41, 16);
+	contentPane.add(label_5);
+	
+	spAchatJour = new JSpinner();
+	spAchatJour.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spAchatJour.setBounds(175, 233, 60, 30);
+	contentPane.add(spAchatJour);
+	
+	spAchatAnnee = new JSpinner();
+	spAchatAnnee.setModel(new SpinnerDateModel(new Date(1590706800000L), new Date(1590706800000L), null, Calendar.YEAR));
+	spAchatAnnee.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spAchatAnnee.setBounds(0, 367, 165, 30);
+	contentPane.add(spAchatAnnee);
+	
+	spAchatMoins = new JSpinner();
+	spAchatMoins.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spAchatMoins.setBounds(175, 189, 60, 30);
+	contentPane.add(spAchatMoins);
+	
+	spGarantieAnnee = new JSpinner();
+	spGarantieAnnee.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spGarantieAnnee.setBounds(422, 149, 60, 30);
+	contentPane.add(spGarantieAnnee);
+	
+	spGarantieMoins = new JSpinner();
+	spGarantieMoins.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spGarantieMoins.setBounds(422, 189, 60, 30);
+	contentPane.add(spGarantieMoins);
+	
+	spGarantieJour = new JSpinner();
+	spGarantieJour.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	spGarantieJour.setBounds(422, 233, 60, 30);
+	contentPane.add(spGarantieJour);
 	
 	setTitle("Ajouter Matérielle");
 	setResizable(false);
-	setBounds(500, 200, 430, 430);
+	setBounds(500, 200, 500, 450);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
 	}
-
 }

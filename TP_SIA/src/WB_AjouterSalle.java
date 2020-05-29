@@ -34,7 +34,7 @@ public class WB_AjouterSalle extends JFrame {
 			}
 		});
 	}
-
+ 
 	/**
 	 * Create the frame.
 	 */

@@ -11,3 +11,4 @@ public class errorPan {
 	    JOptionPane.showMessageDialog(new JFrame(),message,"Alert",JOptionPane.WARNING_MESSAGE,icon);
 	}
 }
+ 

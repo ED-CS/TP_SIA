@@ -35,7 +35,7 @@ public class WB_AjouterPersonne extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		}); 
 	}
 
 	/**

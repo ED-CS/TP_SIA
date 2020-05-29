@@ -58,6 +58,7 @@ public class AjouterSalleFrame extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		tfNomSalle = new JTextField();
+		tfNomSalle.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tfNomSalle.setBounds(190, 84, 160, 40);
 		contentPane.add(tfNomSalle);
 		tfNomSalle.setColumns(10);

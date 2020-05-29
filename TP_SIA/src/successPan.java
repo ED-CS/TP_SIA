@@ -8,3 +8,4 @@ public class successPan {
 	    JOptionPane.showMessageDialog(new JFrame(),message,"Success",JOptionPane.INFORMATION_MESSAGE,icon);
 	}
 }
+ 
