@@ -64,17 +64,17 @@ public class AccuilFrame extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tabbedPane.setBounds(0, 0, 512, 334);
+		tabbedPane.setBounds(0, 0, 512, 358);
 
 		
-        JPanel add_panel = new JPanel();
-        tabbedPane.addTab("Add", add_panel);
-        add_panel.setLayout(null);
+        JPanel nouveau_panel = new JPanel();
+        tabbedPane.addTab("Nouveau", nouveau_panel);
+        nouveau_panel.setLayout(null);
         
         JLabel add_panel_label = new JLabel("Ajouter");
         add_panel_label.setFont(new Font("SansSerif", Font.BOLD, 22));
         add_panel_label.setBounds(199, 27, 89, 34);
-        add_panel.add(add_panel_label);
+        nouveau_panel.add(add_panel_label);
         
         JButton btnNouveauPresonne = new JButton("Nouveau Presonne");
         btnNouveauPresonne.addActionListener(new ActionListener() {
@@ -84,7 +84,7 @@ public class AccuilFrame extends JFrame {
         });
         btnNouveauPresonne.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnNouveauPresonne.setBounds(146, 79, 200, 50);
-        add_panel.add(btnNouveauPresonne);
+        nouveau_panel.add(btnNouveauPresonne);
         
         JButton btnNouveauMaterielle = new JButton("Nouveau Mat\u00E9rielle");
         btnNouveauMaterielle.addActionListener(new ActionListener() {
@@ -94,7 +94,7 @@ public class AccuilFrame extends JFrame {
         });
         btnNouveauMaterielle.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnNouveauMaterielle.setBounds(146, 142, 200, 50);
-        add_panel.add(btnNouveauMaterielle);
+        nouveau_panel.add(btnNouveauMaterielle);
         
         JButton btnNouveauSalle = new JButton("Nouveau Salle");
         btnNouveauSalle.addActionListener(new ActionListener() {
@@ -104,30 +104,31 @@ public class AccuilFrame extends JFrame {
         });
         btnNouveauSalle.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnNouveauSalle.setBounds(146, 205, 200, 50);
-        add_panel.add(btnNouveauSalle);
-        JPanel edit_panel = new JPanel();
-        tabbedPane.addTab("Edit", edit_panel);
-        edit_panel.setLayout(null);
+        nouveau_panel.add(btnNouveauSalle);
+        JPanel matereille_panel = new JPanel();
+        tabbedPane.addTab("Mat\u00E9rielle", matereille_panel);
+        matereille_panel.setLayout(null);
         
-        JButton edit_button = new JButton("Edit");
+        JButton edit_button = new JButton("Mat\u00E9rielle");
+        edit_button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		ReservationMaterielle mat = new ReservationMaterielle(conn);
+        	}
+        });
         edit_button.setFont(font_bold);
-        edit_button.setBounds(118, 193, 90, 28);
-        edit_panel.add(edit_button);
+        edit_button.setBounds(142, 87, 215, 50);
+        matereille_panel.add(edit_button);
         
-        JTextField id_textField = new JTextField("");
-        id_textField.setFont(font_plain);
-        id_textField.setBounds(134, 92, 131, 28);
-        edit_panel.add(id_textField);
-        
-        JLabel id_label = new JLabel("ID");
-        id_label.setFont(font_bold);
-        id_label.setBounds(98, 98, 37, 16);
-        edit_panel.add(id_label);
-        
-        JLabel edit_panel_label = new JLabel("Choose a Product ID to Edit");
+        JLabel edit_panel_label = new JLabel("R\u00E9servation");
         edit_panel_label.setFont(font_title);
-        edit_panel_label.setBounds(37, 6, 272, 35);
-        edit_panel.add(edit_panel_label);
+        edit_panel_label.setBounds(187, 13, 119, 35);
+        matereille_panel.add(edit_panel_label);
+        
+        JButton button_1 = new JButton("Salle");
+        button_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        button_1.setBounds(142, 182, 215, 50);
+        matereille_panel.add(button_1);
 		leftPanel.add(tabbedPane);
 		
 		JPanel search_panel = new JPanel();
@@ -212,9 +213,9 @@ public class AccuilFrame extends JFrame {
 		nonePrice_label.setVisible(false);
 		searchName_panel.add(nonePrice_label);
 		
-		setTitle("Accuil");
+		setTitle("Accueil");
 		setResizable(false);
-		setBounds(500, 200, 520, 370);
+		setBounds(500, 200, 520, 392);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
