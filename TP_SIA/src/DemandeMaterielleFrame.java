@@ -272,7 +272,7 @@ public class DemandeMaterielleFrame extends JFrame {
 							while(resultSet.next()) {
 							    id_demande_materielle = resultSet.getInt(1);
 							}
-							request = "insert into reservation_materielle values("+id_demande_materielle+","+DateDebutChooser.getDate()+","+DateFinChooser.getDate()+","+id_mat+","+heurD+","+heurF+","+minutD+","+minutF+");";
+							request = "insert into reservation_materielle values("+id_demande_materielle+","+id_mat+",'"+dateDebut+"','"+dateFin+"',"+heurD+","+heurF+","+minutD+","+minutF+");";
 							res = statement.executeUpdate( request);				
 							if(res==1) {
 								successPan s = new successPan("demande ajouter",null);
