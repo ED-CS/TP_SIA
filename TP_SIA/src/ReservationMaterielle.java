@@ -42,7 +42,7 @@ public class ReservationMaterielle extends JFrame {
 		try {
 			statement = conn.createStatement();
 			model.setRowCount(0);
-		    resultSet = statement.executeQuery("SELECT * from materielle where id_mat not in(select id_mat from ligne_demande_materielle)");  
+		    resultSet = statement.executeQuery("SELECT * from materielle where id_mat not in(select id_mat from reservation_materielle)");  
 		    while(resultSet.next()) {
 		    	model.addRow(new Object[]{resultSet.getObject(1), resultSet.getObject(2), resultSet.getObject(3), resultSet.getObject(4), resultSet.getObject(5)});
 		    } 
@@ -93,7 +93,7 @@ public class ReservationMaterielle extends JFrame {
 					model.setRowCount(0);
 				    resultSet = statement.executeQuery("SELECT * from materielle");  
 				    while(resultSet.next()) {
-				    	model.addRow(new Object[]{resultSet.getObject(1), resultSet.getObject(2), resultSet.getObject(3), resultSet.getObject(4), resultSet.getObject(4)});				 
+				    	model.addRow(new Object[]{resultSet.getObject(1), resultSet.getObject(2), resultSet.getObject(3), resultSet.getObject(4), resultSet.getObject(5)});				 
 				    } 
 				} 
 				catch(SQLException e1) {
@@ -114,7 +114,7 @@ public class ReservationMaterielle extends JFrame {
 				
 				try {
 					model.setRowCount(0);
-				    resultSet = statement.executeQuery("SELECT * from materielle where id_mat not in(select id_mat from ligne_demande_materielle)");  
+				    resultSet = statement.executeQuery("SELECT * from materielle where id_mat not in(select id_mat from reservation_materielle);");  
 				    while(resultSet.next()) {
 				    	model.addRow(new Object[]{resultSet.getObject(1), resultSet.getObject(2), resultSet.getObject(3), resultSet.getObject(4), resultSet.getObject(5)});		
 				    } 
@@ -144,7 +144,7 @@ public class ReservationMaterielle extends JFrame {
 				String value = table.getValueAt(i, j).toString();
 				try {
 				 resultSet = statement.executeQuery("SELECT * from materielle where id_mat = "+value);
-				    while(resultSet.next()) {
+				    if(resultSet.next()) {
 				    	message = "ID Matérielle: "+resultSet.getObject(1)
 	    				 +"\nNom MAtérielle: "+resultSet.getObject(2)
 	    				 +"\nEmplacement: "+resultSet.getObject(3)

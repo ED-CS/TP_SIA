@@ -29,7 +29,7 @@ public class DesponibiliteFrame extends JFrame {
 		dateChooser.setBounds(118, 88, 190, 40);
 		getContentPane().add(dateChooser);
 		
-		JButton btnOk = new JButton("ok");
+		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SimpleDateFormat sd = new SimpleDateFormat("yyMMdd");
@@ -39,7 +39,7 @@ public class DesponibiliteFrame extends JFrame {
 				String date1 = sd1.format(dateChooser.getDate());
 				try {
 					statement = conn.createStatement();
-				    resultSet = statement.executeQuery("SELECT * from demande_materielle where id_mat ="+Integer.parseInt(id)+"and date_debut = '"+date+"';");  
+				    resultSet = statement.executeQuery("SELECT * from reservation_materielle where id_mat ="+Integer.parseInt(id)+"and date_debut = '"+date+"';");  
 				    if(resultSet.next()) {				 
 				    		successPan b = new successPan("Matérielle est réserver a la date "+date1, null);
 				    		dispose();
@@ -57,7 +57,7 @@ public class DesponibiliteFrame extends JFrame {
 			}
 		});
 		btnOk.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnOk.setBounds(159, 179, 97, 25);
+		btnOk.setBounds(220, 181, 97, 25);
 		getContentPane().add(btnOk);
 		
 		JLabel lblDate = new JLabel("Date");
@@ -65,11 +65,20 @@ public class DesponibiliteFrame extends JFrame {
 		lblDate.setBounds(34, 88, 56, 40);
 		getContentPane().add(lblDate);
 		
+		JButton btnexite = new JButton("Annuler");
+		btnexite.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnexite.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnexite.setBounds(86, 181, 97, 25);
+		getContentPane().add(btnexite);
+		
 		setTitle("Matérielle");
 		setResizable(false);
 		setBounds(500, 200, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
 }
