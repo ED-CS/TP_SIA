@@ -102,7 +102,7 @@ public class ReservationMaterielle extends JFrame {
 			}
 		});
 		rdbtnTout.setBounds(187, 498, 127, 25);
-		rdbtnTout.setSelected(true);
+		
 		contentPane.add(rdbtnTout);
 		/*
 		 * radio button disponible
@@ -125,6 +125,7 @@ public class ReservationMaterielle extends JFrame {
 			}
 		});
 		rdbtnDisponible.setBounds(350, 498, 127, 25);
+		rdbtnDisponible.setSelected(true);
 		contentPane.add(rdbtnDisponible);
 		
 		group = new ButtonGroup();
@@ -201,7 +202,8 @@ public class ReservationMaterielle extends JFrame {
 				int i = table.getSelectedRow();
 				int j = 0;
 				String value = table.getValueAt(i, j).toString();
-				
+
+				DemandeMaterielleFrame demande = new DemandeMaterielleFrame(conn,value);
 				
 				
 			}

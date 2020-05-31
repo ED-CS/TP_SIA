@@ -39,6 +39,21 @@ public class AjouterPersonneFrame extends JFrame {
 		
 		initialize();
 	}
+	public AjouterPersonneFrame(Connection conn,String Nom, String Prenom) {
+		this.conn = conn;
+		
+		
+		try {
+			statement = conn.createStatement();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		tfNomPersonne.setText(Nom);
+		tfPrenomPersonne.setText(Prenom);
+		tfNomPersonne.setEnabled(false);
+		tfPrenomPersonne.setEditable(false);
+		initialize();
+	}
 		/**
 		 * Initialize the contents of the frame.
 		 */
