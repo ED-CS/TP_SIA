@@ -264,15 +264,9 @@ public class DemandeMaterielleFrame extends JFrame {
 						
 					}else {
 						int id_personne= Integer.parseInt(tfIdPesonne.getText());
-						int id_demande_materielle = 0;
-						String request = "insert into demande_reservation_materielle (id_per)values("+id_personne+");";
 						try {
-							res = statement.executeUpdate( request);
-							resultSet = statement.executeQuery("select id_dmd from demande_reservation_materielle;");  
-							while(resultSet.next()) {
-							    id_demande_materielle = resultSet.getInt(1);
-							}
-							request = "insert into reservation_materielle values("+id_demande_materielle+","+id_mat+",'"+dateDebut+"','"+dateFin+"',"+heurD+","+heurF+","+minutD+","+minutF+");";
+					
+							String request = "insert into reservation_materielle values("+id_mat+","+id_personne+",'"+dateDebut+"','"+dateFin+"',"+heurD+","+heurF+","+minutD+","+minutF+");";
 							res = statement.executeUpdate( request);				
 							if(res==1) {
 								successPan s = new successPan("demande ajouter",null);
